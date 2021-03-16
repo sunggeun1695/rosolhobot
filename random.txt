@@ -1,0 +1,7 @@
+client.on('ready', () => {    console.log(        `[시스템]${client.user.username}로 로그인 하였습니다.`    );
+    client.user.setStatus('online');
+    const botgame = [        `${prefix}help 를 쳐보세요`,        `${prefix}help | ${client.guilds.cache.size}서버와 함께 운영중`,        `${prefix}help | ${client.users.cache.size}유저들과 같이 운영중`,        `${prefix}help | 버전 1.5.8v`   ];
+    setInterval(() => {        
+    const activity = botgame[Math.floor(Math.random() * botgame.length)];    
+    client.user.setActivity(activity);  }, 3000 ); 
+});

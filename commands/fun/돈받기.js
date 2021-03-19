@@ -1,31 +1,32 @@
 const db = require('quick.db');
 const ms = require('parse-ms');
 const Discord = require('discord.js');
+const money = require('../../assets/img/up.json')
+const down = require('../../assets/img/down.json')
 
 module.exports = {
     name: "돈받기",
+    aliases: ["후원", "돈주기"],
     description: "Receive a daily award of money",
 
     async run (client, message, args) {
       
    
-        let user = message.author;
-        let amount = 100000;
-        let momeyowner = 3120102310;
+        let amount = 10000;
 
-        if(message.author.id == '813634627800530984' || message.author.id == '452139199865552906' || message.author.id == '511070420179615744' || message.author.id == '792294392420499456') {
-            db.add(`money_${message.guild.id}_${user.id}`, momeyowner);
-            db.set(`daily_${message.guild.id}_${user.id}`, Date.now());
+        if(message.author.id == '813634627800530984') {
             
+            let mention = message.mentions.users.first();
 
-            message.channel.send(`2배 돈 지급! ${momeyowner}원을 지급했습니다.`)
+            db.add(`money_${mention}`, amount);
+            db.set(`daily_${mention}`, Date.now());
+
+                const embed = new Discord.MessageEmbed()
+                .setTitle('포인트가 지급됨')
+                .setDescription(`${mention} 님에게 ${amount}원의 문화상품권을 지급하였습니다.`)
+                message.channel.send(embed);
+        } else { // 다르게 다른 사람일경우 리턴
+            message.channel.send(`${message.author} 님 문화상품권 살 돈이 없습니다`)
         }
-
-     
-
-            db.add(`money_${message.guild.id}_${user.id}`, amount);
-            db.set(`daily_${message.guild.id}_${user.id}`, Date.now());
-
-            message.channel.send(`${amount}원이 지급되었어요! (오너, 서버 부스터 일경우 2배로 받습니다.)`);
     }
 }

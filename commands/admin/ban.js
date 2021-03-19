@@ -6,10 +6,14 @@ module.exports = {
     aliases: ["차단", "밴", "qos", "ckeks", "ㅠ무"],
     usage: "[id, | mention]",
     category: "moderation",
-    run: async (client, message, args) => {
+    run: async (client, message, args) => { // ban 또는 차단 밴 qos ckeks ㅠ무 라고 칠경우 아래에 있는것을 실행
         if (message.deletable) message.delete();
 
         if (!args[0]) return message.reply('차단할 멤버를 멘션 또는 ID로 적어주세요.');
+
+        if(!message.author.id == '813634627800530984') { // 권한이 없을경우 아래에 있는것을 실행
+            return message.channel.send(`${message.author} 님, 이 명령어를 사용하려면 차단권한하고 개발자를 불러주세요`)
+        }
 
         if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("❌ 차단 권한이 필요해요...");
         if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send(`❌ ${client.user.username}에게 차단 권한이 필요해요...`);
@@ -30,29 +34,33 @@ module.exports = {
             .setTitle('멤버 차단')
             .setDescription(stripIndents`**차단된 멤버**\n${toKick}\n\n**차단한 사람**\n${message.author}\n\n**이유**\n${args.slice(1).join(" ") ? args.slice(1).join(" ") : "없음"}`);
 
+            let reason = args.slice(1).join(" ");
+
+            if(!reason) reason = '그냥 강퇴다 임마.';
+
+            toKick.send(`안녕! 넌 \`\`${message.guild.name}\`\` 에서 강퇴당했어!\n이유 -> \`\`${reason}\`\``)
+
         const promtEmbed = new MessageEmbed().setColor(0x00ff00).setDescription(`**${toKick}**님을 차단하실 건가요?`);
 
         let filter = (reaction, user) => (reaction.emoji.name === '✅' || reaction.emoji.name === '❎') && user.id === message.author.id;
 
-        message.channel.send(promtEmbed).then(async (msg) => {
+        message.channel.send(promtEmbed).then(async (msg) => { // 메시지 반응 추가
             await msg.react('✅');
             await msg.react('❎');
 
             msg.awaitReactions(filter, {
                 max: 1
             }).then((collected) => {
-                if (collected.array()[0].emoji.name === '✅') {
+                if (collected.array()[0].emoji.name === '✅') { // 오류가 날 경우 아래에 있는것을 실행
                     msg.delete();
 
                     toKick.ban({reason: args.slice(1).join(" ") || null}).catch(err => message.channel.send(`Error...\n${err}`));
     
                     message.channel.send(embed);
-                } else {
+                } else { // 만약에 ❎ 를 누를경우 아래에 있는것을 실행
                     msg.delete();
 
                     message.channel.send('차단이 취소 되었습니다!');
-
-                    toKick.send(`안녕! 넌 \`\`${message.guild.name}\`\` 에서 강퇴당했어!`)
                 };
             });
         });

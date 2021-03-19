@@ -13,7 +13,7 @@ module.exports = {
       
 const embed = new MessageEmbed()
             .setColor('BLUE')
-            .setTitle(`패치내용: 음악 기능이 추가되었습니다.`)
+            .setTitle(`패치내용: 음악 기능이 추가되었습니다.\n욕 감지 시스템이 사라졌습니다.`)
 
             
             

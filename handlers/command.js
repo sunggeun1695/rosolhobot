@@ -8,8 +8,8 @@ table.setHeading("Command", "Load status");
 
 module.exports = (client) => {
     // Read every commands subfolder
-    readdirSync("./commands/").forEach(dir => {
-        // Filter so we only have .js command files
+    readdirSync("./commands/").forEach(dir => { // 커맨드 파일 로드
+        // 끝나는 파일이 .js 일 경우 이 파일을 가져옴
         const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
     
         // Loop over the commands, and add all of them to a collection
@@ -20,9 +20,9 @@ module.exports = (client) => {
     
             if (pull.name) {
                 client.commands.set(pull.name, pull);
-                table.addRow(file, '✅');
+                table.addRow(file, '✅ 정상적으로 로드됨');
             } else {
-                table.addRow(file, `❌  -> missing a help.name, or help.name is not a string.`);
+                table.addRow(file, `❌  -> 로드중에 오류가 났습니다..!`);
                 continue;
             }
     

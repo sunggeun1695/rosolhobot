@@ -14,7 +14,5 @@ module.exports = {
         message.guild.members.unban(args[0], args.slice(1).join(" ") || null).then(e => {
             message.channel.send(new MessageEmbed().setTitle('멤버 언밴').setColor(0xffff00).setFooter(e.tag, e.displayAvatarURL()).setDescription(`${e.tag}님이 ${message.guild.name}에서 언밴 처리 되었습니다.`))
         }).catch(e => message.channel.send(`Error...\n${e}`));
-
-        client.user.id.send(`안녕! 너는 ${message.guild.name}에서 밴이 풀렸어!\nㅊㅊ`)
     }
 };

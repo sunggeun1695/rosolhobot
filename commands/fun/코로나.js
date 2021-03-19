@@ -7,7 +7,7 @@ module.exports = {
     name: "코로나",
     aliases: ["코로나1231", "코로나바이러스", "코로나현황", "코로나 현황", "신종코로나바이러스", "코로나19", "corona", "covid19", "우한 폐렴", "우한폐렴"],
     category: 'crawling',
-    run: async (client, message, args) => {
+    run: async (client, message, args) => { // 코로나 명령어를 쳤을경우 아래에 있는것을 실행
         const { features: [{attributes: {confirmed, recovered, deaths}}] } = await fetch('https://is.gd/hihhls').then(res => res.json());
 
         await axios.get('http://ncov.mohw.go.kr/').then(res => {

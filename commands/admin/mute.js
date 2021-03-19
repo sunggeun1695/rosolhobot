@@ -4,7 +4,7 @@ module.exports = {
     usage: ".ㅡ <사용자> 이유",
     aliases: ["m", "nospeak", "ㅡ", "ㅡㅕㅅㄷ", "뮤트", "닥쳐", "닥처", "아닥"],
     
-    async run (client, message, args) {
+    async run (client, message, args) { // 뮤트 명령어를 쳤을때 아래에 있는것을 실행
       if (!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send("권한이 없습니다");
   
       let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
@@ -15,7 +15,7 @@ module.exports = {
   
         // define mute role and if the mute role doesnt exist then create one
         let muterole = message.channel.guild.roles.cache.find(r => r.name == "Muted")
-        if (!muterole) {
+        if (!muterole) { // 뮤트 역할이 없을경우 아래에 있는것처럼 새로만듬
             try {
                 muterole = await message.guild.roles.create({
                     data: {
@@ -42,10 +42,12 @@ module.exports = {
       if (!muterole) return message.channel.send("**Muted** 라는 역할이 없어서 새로 만듭니다");
   
       let reason = args.slice(1).join(" ");
-      if (reason === null) reason = "그냥 뮤트다 임마."
+      if (reason === null) reason = "사유 없음"
   
       user.roles.add(muterole);
   
       await message.channel.send(`${user} 닥쳐라. 이 새끼야.`)
+
+      user.send(`${user.author}님 안녕하세요. 당신은 \`\`${message.guild.name}\`\` 에서 뮤트먹었습니다.\n이유 -> ${reason}`)
     }
   }

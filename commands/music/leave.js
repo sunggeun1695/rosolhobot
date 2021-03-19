@@ -18,11 +18,11 @@ run: async (client, message, args) => {
     channel.leave();
     }
     return message.channel.send({embed: {
-      description:'↪ Disconnected'}})
+      description:'↪ 바이루'}})
   } catch {
       serverQueue.connection.dispatcher.end();
       await channel.leave();
-      return message.channel.send("TRY AGAIN");
+      return message.channel.send("오류가 나서 다시시도");
   }
 }
 };

@@ -21,11 +21,12 @@ module.exports = {
 
         let reason = args.slice(1).join(" ");
 
-        if(!reason) reason = 'Unspecified';
+        if(!reason) reason = '사유 없음';
 
         let warnings = db.get(`warnings_${message.guild.id}_${user.id}`);
 
-        if(warnings === 3) return message.channel.send(`${user} 이미 3번째 경고를 먹었습니다.`);
+        if(warnings === 4) return message.channel.send(`${user} 님이 4차 경고가 부여되었으므로 서버에서 밴처리됩니다.`);
+        user.ban('4차 경고가 부여되므로 서버에서 밴처리 됨')
 
 
         if(warnings === null) { // 경고를 set 함

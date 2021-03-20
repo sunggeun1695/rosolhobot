@@ -18,15 +18,15 @@ module.exports = {
             
             let mention = message.mentions.users.first();
 
-            db.add(`money_${mention}`, amount);
-            db.set(`daily_${mention}`, Date.now());
+            db.add(`money_${message.guild.id}_${mention}`, amount);
+            db.set(`daily_${message.guild.id}_${mention}`, Date.now());
 
                 const embed = new Discord.MessageEmbed()
-                .setTitle('포인트가 지급됨')
-                .setDescription(`${mention} 님에게 ${amount}원의 문화상품권을 지급하였습니다.`)
+                .setTitle('로벅스가 지급됨')
+                .setDescription(`${mention} 님에게 ${amount}원의 로벅스을 지급하였습니다.`)
                 message.channel.send(embed);
         } else { // 다르게 다른 사람일경우 리턴
-            message.channel.send(`${message.author} 님 문화상품권 살 돈이 없습니다`)
+            message.channel.send(`${message.author} 님 로벅스 살 돈이 없습니다`)
         }
     }
 }

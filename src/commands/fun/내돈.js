@@ -13,6 +13,6 @@ module.exports = {
         let bal = await db.fetch(`money_${message.guild.id}_${user.id}`);
         if(bal === null) bal = 0;
 
-        message.channel.send(`${user} 현재 ${bal} 코인`)
+        message.channel.send(`${user} 님은 현재 ${bal}개의 로벅스가 있습니다.`)
     }
 }

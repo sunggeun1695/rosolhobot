@@ -3,7 +3,7 @@ module.exports = {
     category: "관리 명령어",
     description: "원하는 양만큼의 메시지를 삭제합니다.",
     run: async (client, message, args) => {
-    
+
         if (!message.member.hasPermission("MANAGE_MESSAGES")) {
             return message.reply("권한이 없는데요").then(m => m.delete(5000));
         }

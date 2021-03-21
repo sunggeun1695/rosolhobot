@@ -1,4 +1,0 @@
-module.exports = {
-  name: "play",
-  aliases: ["재생", "ㅔ", "p"],
-  run: async function(client, message, args) {

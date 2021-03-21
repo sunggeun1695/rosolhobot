@@ -8,8 +8,8 @@ function checkChatting(client, message) { // 채팅 체크
 
     // 시간, 뮤트 롤
     let messageTime = moment().tz('Asia/Seoul').locale('ko').valueOf()
-    let time = bot.authors.get(message.author.id);
-    let forbiddenWordTime = bot.authors.get(message.author.id) || messageTime;
+    let time = client.authors.get(message.author.id);
+    let forbiddenWordTime = client.authors.get(message.author.id) || messageTime;
 
     // 후원자면서 채팅창지박령 일경우 걸리지 않음
     if(best_talker && sponer) return;

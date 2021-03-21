@@ -213,6 +213,53 @@ client.on('message', (message) => {
     }
 })
 
+client.on('message', (message) => {
+    if(message.content == '역할빼기') {
+        message.delete();
+        const embed = new MessageEmbed()
+        .setColor("RED")
+        .setTitle('경고')
+        .setDescription(`${message.mentions} 님이 역할 다운그레이드를 당했습니다.`)
+        message.channel.send(embed)
+    }
+})
+
+client.on('messageDelete', message => {
+    if(!message.partial) {
+        const channel = client.channels.cache.get('806409549258686504');
+        if(channel) {
+            const embed = new MessageEmbed()
+                .setTitle('삭제 메세지')
+                .addField('메세지를 삭제한 사람', `${message.author.tag} (${message.author.id})`, true)
+                .addField('채널', `${message.channel.name} (${message.channel.id})`, true)
+                .setDescription(message.content)
+                .setTimestamp();
+            channel.send(embed);
+        }
+    }
+});
+
+
+client.on('messageUpdate', (newMessage, olderMessage) => {
+    if(!olderMessage.partial) {
+        const channel = client.channels.cache.get('815114144465944606');
+        if(channel) {
+            const embed = new MessageEmbed()
+                .setTitle('수정 메시지')
+                .addField('메시지를 수정한 사람', `${olderMessage.author.tag} (${olderMessage.author.id})`, true)
+                .addField('채널', `${olderMessage.channel.name} (${olderMessage.channel.id})`, true)
+                .addField('수정하기 전 메시지', `${olderMessage.content}`, true)
+                .addField('수정 후 메시지', `${newMessage.content}`, true)
+                .setTimestamp();
+            channel.send(embed)
+        }
+    }
+})
+
+
+
+
+
 
 
 

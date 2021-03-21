@@ -25,8 +25,7 @@ module.exports = {
 
         let warnings = db.get(`warnings_${message.guild.id}_${user.id}`);
 
-        if(warnings === 4) return message.channel.send(`${user} 님이 4차 경고가 부여되었으므로 서버에서 밴처리됩니다.`);
-        user.ban('4차 경고가 부여되므로 서버에서 밴처리 됨')
+        if(warnings === 4) return message.channel.send(`${user} 님이 4차 경고 부여로 밴처리됩니다.`)
 
 
         if(warnings === null) { // 경고를 set 함

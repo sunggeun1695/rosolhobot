@@ -3,7 +3,8 @@ const ytdl = require("ytdl-core");
 const yts = require("yt-search");
 
 module.exports = {
-  name: "재생",
+  name: "play",
+  aliases: ["재생", "플레이"],
   run: async function(client, message, args) {
     const channel = message.member.voice.channel;
     if (!channel) {

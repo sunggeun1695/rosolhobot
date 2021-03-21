@@ -11,10 +11,6 @@ module.exports = {
 
         if (!args[0]) return message.reply('차단할 멤버를 멘션 또는 ID로 적어주세요.');
 
-        if(!message.author.id == '813634627800530984') { // 권한이 없을경우 아래에 있는것을 실행
-            return message.channel.send(`${message.author} 님, 이 명령어를 사용하려면 차단권한하고 개발자를 불러주세요`)
-        }
-
         if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("❌ 차단 권한이 필요해요...");
         if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send(`❌ ${client.user.username}에게 차단 권한이 필요해요...`);
 

@@ -1,5 +1,5 @@
 const client = require("..");
-var config = require("../settings/config.json");
+var config = require("../config.json");
 const { MessageEmbed } = require("discord.js");
 
 client.on('messageCreate', async message => {

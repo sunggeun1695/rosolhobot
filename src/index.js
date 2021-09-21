@@ -16,7 +16,7 @@ const client = new Client({
 });
 module.exports = client;
 
-const config = require("./settings/config.json");
+const config = require("./config.json");
 
 // Collection
 client.commands = new Collection();

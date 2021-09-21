@@ -1,5 +1,5 @@
 const client = require("..");
-const config = require("../settings/config.json")
+const config = require("../config.json")
 
 client.on('ready', () => {
     console.log(`${client.user.username} 으(로) 로그인 하였습니다.`);
